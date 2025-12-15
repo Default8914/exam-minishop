@@ -154,3 +154,64 @@ export function viewOrders({ orders }) {
   `;
 
   const wrap = section.querySelector("#orders");
+
+  if (!orders.length) {
+    wrap.innerHTML = `<p class="muted">Пока нет заказов. Оформи заказ в корзине 🙂</p>`;
+    return section;
+  }
+
+  wrap.innerHTML = "";
+  for (const o of orders.slice().reverse()) {
+    const card = document.createElement("article");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="card__top">
+        <h3 class="card__title">Заказ #${o.id}</h3>
+        <span class="tag">${new Date(o.createdAt).toLocaleString()}</span>
+      </div>
+      <p class="muted">Покупатель: ${o.customer.name} • ${o.customer.phone}</p>
+      <p class="muted">Адрес: ${o.customer.address}</p>
+      <div class="summary">
+        <div class="summary__row"><span>Итого</span><strong>${money(o.total)}</strong></div>
+      </div>
+    `;
+    wrap.appendChild(card);
+  }
+
+  return section;
+}
+
+export function renderCart(listEl, cart, products, onInc, onDec, onDel) {
+  if (cart.items.length === 0) {
+    listEl.innerHTML = `<p class="muted">Корзина пуста. Добавь товары из каталога 🙂</p>`;
+    return;
+  }
+
+  listEl.innerHTML = "";
+  for (const it of cart.items) {
+    const p = products.find((x) => x.id === it.id);
+    if (!p) continue;
+
+    const row = document.createElement("div");
+    row.className = "cart-row";
+    row.innerHTML = `
+      <div>
+        <div class="cart-title">${p.title}</div>
+        <div class="muted">${money(p.price)} • ${p.category}</div>
+      </div>
+
+      <div class="cart-controls">
+        <button class="icon-btn" data-dec type="button">−</button>
+        <span class="qty">${it.qty}</span>
+        <button class="icon-btn" data-inc type="button">+</button>
+        <button class="icon-btn" data-del type="button">✕</button>
+      </div>
+    `;
+
+    row.querySelector("[data-inc]").addEventListener("click", () => onInc(p.id));
+    row.querySelector("[data-dec]").addEventListener("click", () => onDec(p.id));
+    row.querySelector("[data-del]").addEventListener("click", () => onDel(p.id));
+
+    listEl.appendChild(row);
+  }
+}

@@ -6,6 +6,7 @@
   <title>MiniShop — E-commerce</title>
   <meta name="description" content="Учебный e-commerce: каталог, фильтры, корзина, промокоды, localStorage." />
   <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="icon" href="data:,">
 </head>
 <body>
   <a class="skip" href="#main">К содержимому</a>
@@ -20,7 +21,7 @@
         </div>
       </a>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="Навигация">
         <a class="nav__link" href="#/">Каталог</a>
         <a class="nav__link" href="#/orders">Заказы</a>
       </nav>
@@ -32,7 +33,6 @@
   </header>
 
   <main class="container" id="main">
-    <!-- Здесь будет рендер “страниц” -->
     <section id="view"></section>
   </main>
 
@@ -59,9 +59,9 @@
         <p class="error" id="promoError"></p>
 
         <div class="summary">
-          <div class="summary__row"><span>Сумма</span><strong id="sum">0</strong></div>
-          <div class="summary__row"><span>Скидка</span><strong id="discount">0</strong></div>
-          <div class="summary__row summary__row--total"><span>Итого</span><strong id="total">0</strong></div>
+          <div class="summary__row"><span>Сумма</span><strong id="sum">0 ₽</strong></div>
+          <div class="summary__row"><span>Скидка</span><strong id="discount">− 0 ₽</strong></div>
+          <div class="summary__row summary__row--total"><span>Итого</span><strong id="total">0 ₽</strong></div>
         </div>
       </div>
 

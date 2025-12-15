@@ -1,4 +1,4 @@
-import { money } from "/js/utils.js";
+import { money } from "./utils.js";
 
 export function renderCategories(selectEl, products){
   const cats = Array.from(new Set(products.map(p => p.category))).sort();
@@ -216,5 +216,6 @@ export function renderCart(listEl, cart, products, onInc, onDec, onDel){
     listEl.appendChild(row);
   });
 }
+
 
 

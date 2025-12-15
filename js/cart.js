@@ -12,9 +12,7 @@ export function addToCart(cart, productId) {
 export function changeQty(cart, productId, delta) {
   const item = cart.items.find((i) => i.id === productId);
   if (!item) return;
-
   item.qty += delta;
-
   if (item.qty <= 0) {
     cart.items = cart.items.filter((i) => i.id !== productId);
   }
@@ -45,7 +43,6 @@ export function calcTotals(cart, products) {
   }
 
   let discount = 0;
-
   if (cart.promo) {
     const promo = PROMOS[cart.promo];
     if (promo?.type === "percent") discount = sum * (promo.value / 100);

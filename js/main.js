@@ -25,7 +25,7 @@ const els = {
 
   checkoutModal: document.getElementById("checkoutModal"),
   orderForm: document.getElementById("orderForm"),
-  orderHint: document.getElementById("orderHint"),
+  orderHint: document.getElementById("orderHint")
 };
 
 let products = [];
@@ -37,7 +37,6 @@ let state = {
 };
 
 function persist() { saveState(state); }
-
 function openModal(modal) { modal.hidden = false; document.body.classList.add("no-scroll"); }
 function closeModal(modal) { modal.hidden = true; document.body.classList.remove("no-scroll"); }
 
@@ -56,7 +55,7 @@ function syncCartUI() {
 
   const { sum, discount, total } = calcTotals(state.cart, products);
   els.sum.textContent = money(sum);
-  els.discount.textContent = `− ${money(discount)}`;
+  els.discount.textContent = − ${money(discount)};
   els.total.textContent = money(total);
 
   els.promoInput.value = state.cart.promo ?? "";
@@ -66,7 +65,6 @@ function applyFilters(list) {
   const { q, category, maxPrice, sort } = state.filters;
 
   let res = list.filter(p => p.price <= maxPrice);
-
   if (category !== "all") res = res.filter(p => p.category === category);
 
   const qq = q.trim().toLowerCase();
@@ -180,18 +178,18 @@ function renderRoute() {
       products: filtered,
       filters: state.filters,
       onAdd: (id) => { addToCart(state.cart, id); persist(); renderRoute(); },
-      onOpenProduct: (id) => { location.hash = `#/product/${id}`; },
+      onOpenProduct: (id) => { location.hash = #/product/${id}; },
       onBindFilters: ({ search, category, sort, maxPrice, reset, maxPriceLabel, found, grid }) => {
         const update = () => {
           const list = applyFilters([...products]);
           found.textContent = String(list.length);
-          maxPriceLabel.textContent = `до ${state.filters.maxPrice} ₽`;
+          maxPriceLabel.textContent = до ${state.filters.maxPrice} ₽;
 
           renderGrid(
             grid,
             list,
             (id) => { addToCart(state.cart, id); persist(); renderRoute(); },
-            (id) => { location.hash = `#/product/${id}`; }
+            (id) => { location.hash = #/product/${id}; }
           );
         };
 
@@ -240,7 +238,7 @@ function renderRoute() {
   if (route.name === "product") {
     const product = products.find(p => p.id === route.id);
     if (!product) {
-      els.view.innerHTML = `<p class="error">Товар не найден</p>`;
+      els.view.innerHTML = <p class="error">Товар не найден</p>;
       return;
     }
 
@@ -268,7 +266,7 @@ function renderRoute() {
 async function init() {
   products = await loadProducts();
   hydrateFromStorage();
-  bindModalsAndCart();
+bindModalsAndCart();
 
   window.addEventListener("hashchange", renderRoute);
   if (!location.hash) location.hash = "#/";
@@ -276,5 +274,5 @@ async function init() {
 }
 
 init().catch((err) => {
-  els.view.innerHTML = `<p class="error">Ошибка: ${err.message}</p>`;
+  els.view.innerHTML = <p class="error">Ошибка: ${err.message}</p>;
 });

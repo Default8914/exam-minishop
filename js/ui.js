@@ -2,33 +2,36 @@ import { money } from "./utils.js";
 
 const FALLBACK_IMG = "./assets/images/placeholder.jpg";
 
-function safeImg(src) {
-  return src && typeof src === "string" ? src : FALLBACK_IMG;
+function imgSrc(src) {
+  return (typeof src === "string" && src.trim()) ? src : FALLBACK_IMG;
+}
+
+function attachImgFallback(imgEl) {
+  imgEl.addEventListener("error", () => {
+    imgEl.src = FALLBACK_IMG;
+  }, { once: true });
 }
 
 export function renderCategories(selectEl, products) {
-  const cats = Array.from(new Set(products.map((p) => p.category))).sort();
-  for (const c of cats) {
+  const cats = Array.from(new Set(products.map(p => p.category))).sort();
+  cats.forEach(c => {
     const opt = document.createElement("option");
     opt.value = c;
     opt.textContent = c;
     selectEl.appendChild(opt);
-  }
+  });
 }
 
 export function renderGrid(gridEl, products, onAdd, onOpenProduct) {
   gridEl.innerHTML = "";
-  for (const p of products) {
+
+  products.forEach(p => {
     const card = document.createElement("article");
     card.className = "card";
 
     card.innerHTML = `
       <div class="card__media">
-        <img class="card__img"
-             src="${safeImg(p.image)}"
-             alt="${p.title}"
-             loading="lazy"
-             onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+        <img class="card__img" alt="${p.title}" loading="lazy">
       </div>
 
       <div class="card__top">
@@ -47,10 +50,15 @@ export function renderGrid(gridEl, products, onAdd, onOpenProduct) {
       </div>
     `;
 
+    const img = card.querySelector(".card__img");
+    img.src = imgSrc(p.image);
+    attachImgFallback(img);
+
     card.querySelector("[data-add]").addEventListener("click", () => onAdd(p.id));
     card.querySelector("[data-open]").addEventListener("click", () => onOpenProduct(p.id));
+
     gridEl.appendChild(card);
-  }
+  });
 }
 
 export function viewCatalog({ products, filters, onAdd, onOpenProduct, onBindFilters }) {
@@ -137,11 +145,7 @@ export function viewProduct({ product, onAdd, onBack }) {
 
     <div class="product">
       <div class="product__img">
-        <img class="product__imgEl"
-             src="${safeImg(product.image)}"
-             alt="${product.title}"
-             loading="lazy"
-             onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+        <img class="product__imgEl" alt="${product.title}" loading="lazy">
       </div>
 
       <div class="product__info">
@@ -159,6 +163,10 @@ export function viewProduct({ product, onAdd, onBack }) {
       </div>
     </div>
   `;
+
+  const img = section.querySelector(".product__imgEl");
+  img.src = imgSrc(product.image);
+  attachImgFallback(img);
 
   section.querySelector("[data-back]").addEventListener("click", onBack);
   section.querySelector("[data-add]").addEventListener("click", () => onAdd(product.id));
@@ -186,7 +194,7 @@ export function viewOrders({ orders }) {
   }
 
   wrap.innerHTML = "";
-  for (const o of orders.slice().reverse()) {
+  orders.slice().reverse().forEach(o => {
     const card = document.createElement("article");
     card.className = "card";
     card.innerHTML = `
@@ -201,7 +209,7 @@ export function viewOrders({ orders }) {
       </div>
     `;
     wrap.appendChild(card);
-  }
+  });
 
   return section;
 }
@@ -213,19 +221,15 @@ export function renderCart(listEl, cart, products, onInc, onDec, onDel) {
   }
 
   listEl.innerHTML = "";
-  for (const it of cart.items) {
-    const p = products.find((x) => x.id === it.id);
-    if (!p) continue;
+  cart.items.forEach(it => {
+    const p = products.find(x => x.id === it.id);
+    if (!p) return;
 
     const row = document.createElement("div");
     row.className = "cart-row";
     row.innerHTML = `
       <div class="cart-mini">
-        <img class="cart-mini__img"
-             src="${safeImg(p.image)}"
-             alt="${p.title}"
-             loading="lazy"
-             onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
+        <img class="cart-mini__img" alt="${p.title}" loading="lazy">
         <div>
           <div class="cart-title">${p.title}</div>
           <div class="muted">${money(p.price)} • ${p.category}</div>
@@ -240,10 +244,14 @@ export function renderCart(listEl, cart, products, onInc, onDec, onDel) {
       </div>
     `;
 
+    const img = row.querySelector(".cart-mini__img");
+    img.src = imgSrc(p.image);
+    attachImgFallback(img);
+
     row.querySelector("[data-inc]").addEventListener("click", () => onInc(p.id));
     row.querySelector("[data-dec]").addEventListener("click", () => onDec(p.id));
     row.querySelector("[data-del]").addEventListener("click", () => onDel(p.id));
 
     listEl.appendChild(row);
-  }
+  });
 }

@@ -2,11 +2,11 @@ import { money } from "./utils.js";
 
 const FALLBACK_IMG = "./assets/images/placeholder.jpg";
 
-function imgSrc(src) {
+function srcOrFallback(src) {
   return (typeof src === "string" && src.trim()) ? src : FALLBACK_IMG;
 }
 
-function attachImgFallback(imgEl) {
+function setFallbackOnce(imgEl) {
   imgEl.addEventListener("error", () => {
     imgEl.src = FALLBACK_IMG;
   }, { once: true });
@@ -14,18 +14,18 @@ function attachImgFallback(imgEl) {
 
 export function renderCategories(selectEl, products) {
   const cats = Array.from(new Set(products.map(p => p.category))).sort();
-  cats.forEach(c => {
+  for (const c of cats) {
     const opt = document.createElement("option");
     opt.value = c;
     opt.textContent = c;
     selectEl.appendChild(opt);
-  });
+  }
 }
 
 export function renderGrid(gridEl, products, onAdd, onOpenProduct) {
   gridEl.innerHTML = "";
 
-  products.forEach(p => {
+  for (const p of products) {
     const card = document.createElement("article");
     card.className = "card";
 
@@ -51,14 +51,14 @@ export function renderGrid(gridEl, products, onAdd, onOpenProduct) {
     `;
 
     const img = card.querySelector(".card__img");
-    img.src = imgSrc(p.image);
-    attachImgFallback(img);
+    img.src = srcOrFallback(p.image);
+    setFallbackOnce(img);
 
     card.querySelector("[data-add]").addEventListener("click", () => onAdd(p.id));
     card.querySelector("[data-open]").addEventListener("click", () => onOpenProduct(p.id));
 
     gridEl.appendChild(card);
-  });
+  }
 }
 
 export function viewCatalog({ products, filters, onAdd, onOpenProduct, onBindFilters }) {
@@ -123,7 +123,7 @@ export function viewCatalog({ products, filters, onAdd, onOpenProduct, onBindFil
   category.value = filters.category;
   sort.value = filters.sort;
   maxPrice.value = String(filters.maxPrice);
-  maxPriceLabel.textContent = `до ${filters.maxPrice} ₽`;
+  maxPriceLabel.textContent = до ${filters.maxPrice} ₽;
 
   renderGrid(grid, products, onAdd, onOpenProduct);
   found.textContent = String(products.length);
@@ -165,8 +165,8 @@ export function viewProduct({ product, onAdd, onBack }) {
   `;
 
   const img = section.querySelector(".product__imgEl");
-  img.src = imgSrc(product.image);
-  attachImgFallback(img);
+  img.src = srcOrFallback(product.image);
+  setFallbackOnce(img);
 
   section.querySelector("[data-back]").addEventListener("click", onBack);
   section.querySelector("[data-add]").addEventListener("click", () => onAdd(product.id));
@@ -189,12 +189,12 @@ export function viewOrders({ orders }) {
   const wrap = section.querySelector("#orders");
 
   if (!orders.length) {
-    wrap.innerHTML = `<p class="muted">Пока нет заказов. Оформи заказ в корзине 🙂</p>`;
+    wrap.innerHTML = <p class="muted">Пока нет заказов. Оформи заказ в корзине 🙂</p>;
     return section;
   }
 
   wrap.innerHTML = "";
-  orders.slice().reverse().forEach(o => {
+  for (const o of orders.slice().reverse()) {
     const card = document.createElement("article");
     card.className = "card";
     card.innerHTML = `
@@ -209,24 +209,25 @@ export function viewOrders({ orders }) {
       </div>
     `;
     wrap.appendChild(card);
-  });
+  }
 
   return section;
 }
 
 export function renderCart(listEl, cart, products, onInc, onDec, onDel) {
   if (cart.items.length === 0) {
-    listEl.innerHTML = `<p class="muted">Корзина пуста. Добавь товары из каталога 🙂</p>`;
+    listEl.innerHTML = <p class="muted">Корзина пуста. Добавь товары из каталога 🙂</p>;
     return;
   }
 
   listEl.innerHTML = "";
-  cart.items.forEach(it => {
+  for (const it of cart.items) {
     const p = products.find(x => x.id === it.id);
-    if (!p) return;
+    if (!p) continue;
 
     const row = document.createElement("div");
     row.className = "cart-row";
+
     row.innerHTML = `
       <div class="cart-mini">
         <img class="cart-mini__img" alt="${p.title}" loading="lazy">
@@ -245,13 +246,13 @@ export function renderCart(listEl, cart, products, onInc, onDec, onDel) {
     `;
 
     const img = row.querySelector(".cart-mini__img");
-    img.src = imgSrc(p.image);
-    attachImgFallback(img);
+    img.src = srcOrFallback(p.image);
+    setFallbackOnce(img);
 
     row.querySelector("[data-inc]").addEventListener("click", () => onInc(p.id));
     row.querySelector("[data-dec]").addEventListener("click", () => onDec(p.id));
     row.querySelector("[data-del]").addEventListener("click", () => onDel(p.id));
 
     listEl.appendChild(row);
-  });
+  }
 }

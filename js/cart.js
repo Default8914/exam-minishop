@@ -1,20 +1,22 @@
 export const PROMOS = {
   SALE10: { type: "percent", value: 10 },
-  BONUS50: { type: "fixed", value: 50 },
+  BONUS50: { type: "fixed", value: 50 }
 };
 
 export function addToCart(cart, productId) {
-  const item = cart.items.find((i) => i.id === productId);
+  const item = cart.items.find(i => i.id === productId);
   if (item) item.qty += 1;
   else cart.items.push({ id: productId, qty: 1 });
 }
 
 export function changeQty(cart, productId, delta) {
-  const item = cart.items.find((i) => i.id === productId);
+  const item = cart.items.find(i => i.id === productId);
   if (!item) return;
+
   item.qty += delta;
+
   if (item.qty <= 0) {
-    cart.items = cart.items.filter((i) => i.id !== productId);
+    cart.items = cart.items.filter(i => i.id !== productId);
   }
 }
 
@@ -38,7 +40,7 @@ export function calcTotals(cart, products) {
   let sum = 0;
 
   for (const it of cart.items) {
-    const p = products.find((x) => x.id === it.id);
+    const p = products.find(x => x.id === it.id);
     if (p) sum += p.price * it.qty;
   }
 

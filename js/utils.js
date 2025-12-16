@@ -1,5 +1,5 @@
 export function money(n) {
-  return `${Number(n).toFixed(0)} ₽`;
+  return ${Number(n).toFixed(0)} ₽;
 }
 
 export function debounce(fn, ms = 250) {

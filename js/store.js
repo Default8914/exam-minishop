@@ -1,15 +1,13 @@
-export function money(n) {
-  return ${Number(n).toFixed(0)} ₽;
+const KEY = "minishop_state_v4";
+
+export function loadState() {
+  try {
+    return JSON.parse(localStorage.getItem(KEY)) || null;
+  } catch {
+    return null;
+  }
 }
 
-export function debounce(fn, ms = 250) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...args), ms);
-  };
-}
-
-export function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
+export function saveState(state) {
+  localStorage.setItem(KEY, JSON.stringify(state));
 }

@@ -134,6 +134,20 @@ body{
   display:grid;
   gap:10px;
 }
+
+.card__media{
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(255,255,255,.03);
+}
+.card__img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  display:block;
+}
+
 .card__top{display:flex; align-items:start; justify-content:space-between; gap:10px}
 .card__title{margin:0; font-size:16px}
 .tag{
@@ -141,6 +155,7 @@ body{
   border-radius:999px; border:1px solid var(--line);
   color:var(--muted);
 }
+
 .card__bottom{display:flex; align-items:end; justify-content:space-between; gap:10px}
 .price{font-weight:900; font-size:18px}
 
@@ -158,6 +173,7 @@ body{
 
 .page{padding:16px 0 24px}
 .page-head{display:flex; justify-content:space-between; align-items:center; gap:10px; margin:16px 0}
+
 .product{
   display:grid;
   gap:14px;
@@ -167,11 +183,16 @@ body{
   border:1px solid var(--line);
   background:rgba(255,255,255,.04);
   border-radius:18px;
-  min-height:180px;
-  display:grid;
-  place-items:center;
-  font-size:52px;
+  overflow:hidden;
+  min-height:220px;
   box-shadow: var(--shadow);
+}
+.product__imgEl{
+  width:100%;
+  height:100%;
+  min-height:220px;
+  object-fit:cover;
+  display:block;
 }
 .product__title{margin:0 0 6px}
 .product__buy{
@@ -181,6 +202,8 @@ body{
 .price--big{font-size:24px}
 @media(min-width:900px){
   .product{grid-template-columns: .9fr 1.1fr}
+  .product__img{min-height:320px}
+  .product__imgEl{min-height:320px}
 }
 
 .modal[hidden]{display:none}

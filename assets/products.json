@@ -1,12 +1,12 @@
 [
-  {"id":"p1","title":"Беспроводные наушники","price":79,"rating":4.6,"category":"Аудио","tags":["bluetooth","audio"],"desc":"Лёгкие наушники с шумоподавлением (демо-описание)."},
-  {"id":"p2","title":"Механическая клавиатура","price":99,"rating":4.7,"category":"Периферия","tags":["keyboard","mechanical"],"desc":"Надёжные свитчи, подсветка, удобный набор текста."},
-  {"id":"p3","title":"Мышь для работы","price":29,"rating":4.2,"category":"Периферия","tags":["mouse"],"desc":"Эргономичная мышь для офиса и дома."},
-  {"id":"p4","title":"Умная лампа","price":25,"rating":4.1,"category":"Дом","tags":["smart","light"],"desc":"Регулировка яркости и цвета, управление со смартфона."},
-  {"id":"p5","title":"Power Bank 20 000mAh","price":45,"rating":4.5,"category":"Гаджеты","tags":["battery"],"desc":"Большая ёмкость, быстрая зарядка (демо)."},
-  {"id":"p6","title":"USB-C Hub 6-в-1","price":39,"rating":4.3,"category":"Гаджеты","tags":["usb-c"],"desc":"HDMI, USB, кардридер — всё в одном."},
-  {"id":"p7","title":"Портативная колонка","price":59,"rating":4.4,"category":"Аудио","tags":["speaker","audio"],"desc":"Громкий звук и автономность."},
-  {"id":"p8","title":"Коврик для мыши XL","price":19,"rating":4.0,"category":"Периферия","tags":["desk"],"desc":"Большой коврик под клавиатуру и мышь."},
-  {"id":"p9","title":"Термокружка","price":21,"rating":4.2,"category":"Дом","tags":["mug"],"desc":"Держит тепло до нескольких часов."},
-  {"id":"p10","title":"Планер на неделю","price":12,"rating":4.1,"category":"Офис","tags":["planner"],"desc":"Планирование задач и целей на неделю."}
+  {"id":"p1","title":"Беспроводные наушники","price":79,"rating":4.6,"category":"Аудио","tags":["bluetooth","audio"],"desc":"Лёгкие наушники с шумоподавлением (демо-описание).","image":"./assets/images/p1.jpg"},
+  {"id":"p2","title":"Механическая клавиатура","price":99,"rating":4.7,"category":"Периферия","tags":["keyboard","mechanical"],"desc":"Надёжные свитчи, подсветка, удобный набор текста.","image":"./assets/images/p2.jpg"},
+  {"id":"p3","title":"Мышь для работы","price":29,"rating":4.2,"category":"Периферия","tags":["mouse"],"desc":"Эргономичная мышь для офиса и дома.","image":"./assets/images/p3.jpg"},
+  {"id":"p4","title":"Умная лампа","price":25,"rating":4.1,"category":"Дом","tags":["smart","light"],"desc":"Регулировка яркости и цвета, управление со смартфона.","image":"./assets/images/p4.jpg"},
+  {"id":"p5","title":"Power Bank 20 000mAh","price":45,"rating":4.5,"category":"Гаджеты","tags":["battery"],"desc":"Большая ёмкость, быстрая зарядка (демо).","image":"./assets/images/p5.jpg"},
+  {"id":"p6","title":"USB-C Hub 6-в-1","price":39,"rating":4.3,"category":"Гаджеты","tags":["usb-c"],"desc":"HDMI, USB, кардридер — всё в одном.","image":"./assets/images/p6.jpg"},
+  {"id":"p7","title":"Портативная колонка","price":59,"rating":4.4,"category":"Аудио","tags":["speaker","audio"],"desc":"Громкий звук и автономность.","image":"./assets/images/p7.jpg"},
+  {"id":"p8","title":"Коврик для мыши XL","price":19,"rating":4.0,"category":"Периферия","tags":["desk"],"desc":"Большой коврик под клавиатуру и мышь.","image":"./assets/images/p8.jpg"},
+  {"id":"p9","title":"Термокружка","price":21,"rating":4.2,"category":"Дом","tags":["mug"],"desc":"Держит тепло до нескольких часов.","image":"./assets/images/p9.jpg"},
+  {"id":"p10","title":"Планер на неделю","price":12,"rating":4.1,"category":"Офис","tags":["planner"],"desc":"Планирование задач и целей на неделю.","image":"./assets/images/p10.jpg"}
 ]

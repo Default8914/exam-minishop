@@ -253,3 +253,40 @@ body{
 
 .footer{border-top:1px solid var(--line); padding:14px 0}
 .footer__row{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:13px}
+/* ===== Images ===== */
+.card__media{
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:rgba(255,255,255,.03);
+}
+.card__img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  display:block;
+}
+
+.product__img{ overflow:hidden; }
+.product__imgEl{
+  width:100%;
+  height:100%;
+  min-height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.cart-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.cart-mini__img{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  object-fit:cover;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+
